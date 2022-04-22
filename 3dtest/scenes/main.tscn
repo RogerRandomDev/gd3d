@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqjwvkkue3yg"]
+
+[ext_resource type="PackedScene" uid="uid://bdpjt70qmmp2r" path="res://scenes/world.tscn" id="1_8ejsv"]
+
+[node name="main" type="Control"]
+
+[node name="WorldView" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="WorldView"]
+handle_input_locally = false
+size = Vector2i(1024, 600)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="WorldView/SubViewport" instance=ExtResource( "1_8ejsv" )]
