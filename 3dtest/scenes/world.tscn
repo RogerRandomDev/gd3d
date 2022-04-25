@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdpjt70qmmp2r"]
 
-[ext_resource type="Script" path="res://scenes/Camera3D.gd" id="1_1eys8"]
 [ext_resource type="Texture2D" uid="uid://cb3568paf6pfj" path="res://addons/kenney_prototype_textures/dark/texture_02.png" id="1_8tav1"]
 [ext_resource type="Material" uid="uid://d4ayuxehnfrhj" path="res://scenes/worldMaterial.tres" id="2_pn6fq"]
+[ext_resource type="PackedScene" uid="uid://dlpu5c50evnbw" path="res://scenes/player.tscn" id="3_pui1g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mwn3"]
 albedo_texture = ExtResource( "1_8tav1" )
@@ -26,14 +26,13 @@ backface_collision = true
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.73515)
-script = ExtResource( "1_1eys8" )
-
 [node name="props" type="Node3D" parent="."]
 
-[node name="RigidDynamicBody3D" type="RigidDynamicBody3D" parent="props"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81513, 0.882346, -3.67283)
+[node name="RigidDynamicBody3D" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81513, 0.532346, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D"]
 mesh = SubResource( "CylinderMesh_jybkx" )
@@ -42,10 +41,78 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D"]
 shape = SubResource( "CylinderShape3D_mw657" )
 
+[node name="RigidDynamicBody3D2" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27513, 1.53235, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D2"]
+mesh = SubResource( "CylinderMesh_jybkx" )
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D2"]
+shape = SubResource( "CylinderShape3D_mw657" )
+
+[node name="RigidDynamicBody3D3" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27513, 1.53235, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D3"]
+mesh = SubResource( "CylinderMesh_jybkx" )
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D3"]
+shape = SubResource( "CylinderShape3D_mw657" )
+
+[node name="RigidDynamicBody3D6" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77513, 2.53235, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D6"]
+mesh = SubResource( "CylinderMesh_jybkx" )
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D6"]
+shape = SubResource( "CylinderShape3D_mw657" )
+
+[node name="RigidDynamicBody3D4" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81513, 0.532346, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D4"]
+mesh = SubResource( "CylinderMesh_jybkx" )
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D4"]
+shape = SubResource( "CylinderShape3D_mw657" )
+
+[node name="RigidDynamicBody3D5" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18487, 0.532346, -3.67283)
+mass = 0.05
+contact_monitor = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D5"]
+mesh = SubResource( "CylinderMesh_jybkx" )
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="props/RigidDynamicBody3D5"]
+shape = SubResource( "CylinderShape3D_mw657" )
+
+[node name="CharacterBody3D" parent="." groups=["moveable"] instance=ExtResource( "3_pui1g" )]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
 [node name="Map" type="Node3D" parent="."]
 
 [node name="insideBox" type="MeshInstance3D" parent="Map"]
-transform = Transform3D(31, 0, 0, 0, 6, 0, 0, 0, 30, 0, 1.5, -5)
+transform = Transform3D(31, 0, 0, 0, 6, 0, 0, 0, 30, 0, 3, -5)
 mesh = SubResource( "BoxMesh_3p74r" )
 surface_material_override/0 = ExtResource( "2_pn6fq" )
 
