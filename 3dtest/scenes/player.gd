@@ -22,8 +22,8 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backwards")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = move_toward(velocity.x, direction.x * SPEED,delta*20)
+		velocity.z = move_toward(velocity.z, direction.z * SPEED,delta*20)
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, SPEED*0.125)
 		velocity.z = move_toward(velocity.z, 0, SPEED*0.125)
@@ -33,4 +33,4 @@ func _physics_process(delta):
 
 #used mainly for explosions
 func apply_central_impulse(force):
-	velocity+=force*20
+	velocity+=force*Vector3(20,30,20)

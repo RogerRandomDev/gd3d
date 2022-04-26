@@ -22,9 +22,8 @@ func _input(event):
 	#pickup item script
 	if Input.is_action_just_pressed("interact"):
 		grab_item()
-		explode()
 	#exits to menu
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if Input.is_action_just_pressed("esc"):
 		in_game=!in_game
 		if in_game:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
@@ -44,6 +43,7 @@ func grab_item():
 		holding.linear_damp=held_damp
 		holding.constant_force=Vector3.ZERO
 		holding.linear_velocity=get_node(rotateObject).velocity
+		holding.apply_central_impulse(get_hold_point()-global_transform.origin)
 		holding=null
 		return
 	#grabs item if not just dropping the current one
@@ -65,8 +65,8 @@ func get_hold_point():
 #makes an explosion
 func explode():
 	var exploder=ExplosionObject.new()
-	exploder.position=get_hold_point()
-	exploder.explosionPower=2
+	exploder.position=global_transform.origin
+	exploder.explosionPower=4
 	exploder.explosionRadius=3
-	
+	exploder.ignore=get_node(rotateObject)
 	get_node(rotateObject).get_parent().call_deferred('add_child',exploder)
