@@ -4,6 +4,8 @@ extends Camera3D
 @export var maxRotation:float=1.41372
 @export var sensitivity:float=0.001
 @export var rotateObject:NodePath
+signal item_grabbed
+signal item_dropped
 var in_game=false
 var held_damp=0
 var pickup_ray=PhysicsRayQueryParameters3D.new()
@@ -14,9 +16,9 @@ func _ready():
 	pickup_ray.collision_mask=1
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if holding!=null:
-		holding.constant_force=(get_hold_point()-holding.position).normalized()*5
+		holding.constant_force=(get_hold_point()-holding.position).normalized()*holding.mass*100
 
 func _input(event):
 	#pickup item script
@@ -42,31 +44,25 @@ func grab_item():
 	if holding!=null:
 		holding.linear_damp=held_damp
 		holding.constant_force=Vector3.ZERO
-		holding.linear_velocity=get_node(rotateObject).velocity
+		holding.linear_velocity=get_node(rotateObject).linear_velocity
 		holding.apply_central_impulse(get_hold_point()-global_transform.origin)
+		get_node(rotateObject).emit_signal('item_dropped',holding)
 		holding=null
 		return
 	#grabs item if not just dropping the current one
 	pickup_ray.from=global_transform.origin
-	var rot=get_node(rotateObject).rotation+rotation
 	pickup_ray.to=get_hold_point()
 	var grabbed:=get_world_3d().direct_space_state.intersect_ray(pickup_ray)
 	if grabbed&&grabbed.collider.is_in_group("grabable"):
 		holding=grabbed.collider
 		held_damp=holding.linear_damp
 		holding.linear_damp=10
-		
+		get_node(rotateObject).emit_signal('item_grabbed',holding)
 
 #where an item is held relative to you
 func get_hold_point():
-	return global_transform.origin-Vector3(sin(get_node(rotateObject).rotation.y),-sin(rotation.x),cos(get_node(rotateObject).rotation.y))*1.5
+	var angleHelp=Vector2(sin(get_node(rotateObject).rotation.y),cos(get_node(rotateObject).rotation.y))
+	return global_transform.origin-Vector3(angleHelp.x,-sin(rotation.x),angleHelp.y)*1.5
 
 
-#makes an explosion
-func explode():
-	var exploder=ExplosionObject.new()
-	exploder.position=global_transform.origin
-	exploder.explosionPower=4
-	exploder.explosionRadius=3
-	exploder.ignore=get_node(rotateObject)
-	get_node(rotateObject).get_parent().call_deferred('add_child',exploder)
+

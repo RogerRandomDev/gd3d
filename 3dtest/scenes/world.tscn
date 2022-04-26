@@ -30,8 +30,8 @@ backface_collision = true
 
 [node name="RigidDynamicBody3D" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81513, 0.532346, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D"]
@@ -43,8 +43,8 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="RigidDynamicBody3D2" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27513, 1.53235, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D2"]
@@ -56,8 +56,8 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="RigidDynamicBody3D3" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27513, 1.53235, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D3"]
@@ -69,8 +69,8 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="RigidDynamicBody3D6" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77513, 2.53235, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D6"]
@@ -82,8 +82,8 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="RigidDynamicBody3D4" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81513, 0.532346, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D4"]
@@ -95,8 +95,8 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="RigidDynamicBody3D5" type="RigidDynamicBody3D" parent="props" groups=["grabable", "moveable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18487, 0.532346, -3.67283)
-mass = 0.05
 contact_monitor = true
+linear_damp = 0.1
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="props/RigidDynamicBody3D5"]
@@ -108,6 +108,7 @@ shape = SubResource( "CylinderShape3D_mw657" )
 
 [node name="CharacterBody3D" parent="." groups=["moveable"] instance=ExtResource( "3_pui1g" )]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+gravity_scale = 0.0
 
 [node name="Map" type="Node3D" parent="."]
 

@@ -1,11 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlpu5c50evnbw"]
+[gd_scene load_steps=5 format=3 uid="uid://dlpu5c50evnbw"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_4e3g2"]
 [ext_resource type="Script" path="res://scenes/Camera3D.gd" id="2_q6f7i"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_33wsx"]
+rough = true
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i6hlp"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="player" type="RigidDynamicBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource( "PhysicsMaterial_33wsx" )
+gravity_scale = 0.0
+contacts_reported = 2
+contact_monitor = true
+freeze_mode = 1
 script = ExtResource( "1_4e3g2" )
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
